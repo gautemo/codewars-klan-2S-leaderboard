@@ -4,7 +4,7 @@ import Home from './views/Home.vue'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -22,6 +22,29 @@ export default new Router({
       component: function () { 
         return import(/* webpackChunkName: "about" */ './views/About.vue')
       }
+    },
+    {
+      path: '/api-token',
+      name: 'api-token',
+      component: () => import('./views/Token.vue'),
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if(to.name !== 'api-token'){
+    const codeWarsApiKey = localStorage.getItem('codewars-api-token');
+    if(!codeWarsApiKey){
+      next('api-token')
+    }else{
+      next();
+    }
+  }else{
+    next();
+  }
+});
+
+export default router;
