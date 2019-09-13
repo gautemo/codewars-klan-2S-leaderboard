@@ -38,13 +38,17 @@ export default {
   },
   methods: {
     async addPlayer() {
-      await db.collection("users").doc(this.newUser).set({timeadded: new Date().toUTCString()});
+      await db.collection('users').doc(this.newUser).add({timeadded: new Date().toUTCString()});
       this.closeDialog();
     },
     closeDialog(){
       this.newUser = '';
       this.showDialog = false;
     }
+  },
+  async created(){
+    const resp = await fetch('https://europe-west1-codewars-leaderboard-2s.cloudfunctions.net/getAllWarriors');
+    this.allUsers = await resp.json();
   }
 }
 </script>
