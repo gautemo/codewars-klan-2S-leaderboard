@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <button @click="showDialog = true">ADD WARRIOR</button>
+    <Leaderboard :users="allUsers"/>
 
     <dialog :open="showDialog">
       <input type="text" v-model="newUser" @keyup.enter="addPlayer()">
@@ -38,17 +39,26 @@ export default {
   },
   methods: {
     async addPlayer() {
-      await db.collection('users').doc(this.newUser).add({timeadded: new Date().toUTCString()});
-      this.closeDialog();
+      if(this.newUser.length > 0){
+        await db.collection('users').doc(this.newUser).set({updated: new Date().toUTCString()});
+        await this.retrieveUsers();
+        this.closeDialog();
+      }
     },
     closeDialog(){
       this.newUser = '';
       this.showDialog = false;
+    },
+    async retrieveUsers(){
+      const resp = await fetch('https://europe-west1-codewars-leaderboard-2s.cloudfunctions.net/getAllWarriors');
+      this.allUsers = await resp.json();
     }
   },
   async created(){
-    const resp = await fetch('https://europe-west1-codewars-leaderboard-2s.cloudfunctions.net/getAllWarriors');
-    this.allUsers = await resp.json();
+    await this.retrieveUsers();
+  },
+  components: {
+    Leaderboard: () => import('./components/Leaderboard')
   }
 }
 </script>

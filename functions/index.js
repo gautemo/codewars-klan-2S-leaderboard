@@ -9,13 +9,19 @@ exports.getAllWarriors = functions.region('europe-west1').https.onRequest(async 
     response.set('Access-Control-Allow-Origin', '*');
 
     const userNames = (await db.collection('users').get()).docs.map(s => s.id);
-    const usersInfo = userNames.map(u => getUser(u));
+    const usersInfoPromise = userNames.map(u => getUser(u));
 
-    response.send(await Promise.all(usersInfo));
+    const usersInfo = await Promise.all(usersInfoPromise);
+    response.send(usersInfo.filter(u => u !== null));
 });
 
 const getUser = async user => {
     const token = functions.config().codewars.token;
     const resp = await fetch(`https://www.codewars.com/api/v1/users/${user}?access_key=${token}`);
-    return await resp.json();
+    const data = await resp.json();
+    if(data.success === false){
+        //TODO: remove if reason "not found"
+        return null;
+    }
+    return data;
 }
