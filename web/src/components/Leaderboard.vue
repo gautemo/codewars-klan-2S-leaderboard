@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <div v-for="clan in clans" :key="clan.name">
-      Name: {{clan.name}}, Score: {{clan.totalHonor}}
+  <div class="clan-list">
+    <div v-for="(clan, i) in clans" :key="clan.name">
+      <ClanInfo :clan="clan" :place="i" />
     </div>
   </div>
 </template>
@@ -25,6 +25,9 @@ export default {
       }, []);
       return clans.sort((a,b) => averageScore(a) < averageScore(b));
     }
+  },
+  components:{
+    ClanInfo: () => import('./ClanInfo')
   }
 }
 
@@ -32,5 +35,7 @@ const averageScore = clan => clan.totalHonor / clan.users.length;
 </script>
 
 <style scoped>
-
+.clan-list{
+  margin: 15px 0;
+}
 </style>
