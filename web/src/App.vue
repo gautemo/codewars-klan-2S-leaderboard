@@ -8,6 +8,7 @@
       <button @click="showDialog = true">ADD WARRIOR</button>
     </header>
     <Leaderboard :users="allUsers"/>
+    <Info/>
 
     <AddPlayerDialog :open="showDialog" v-on:closed="closeDialog($event)"/>
   </div>
@@ -40,7 +41,8 @@ export default {
   },
   components: {
     Leaderboard: () => import('./components/Leaderboard'),
-    AddPlayerDialog: () => import('./components/AddPlayerDialog')
+    AddPlayerDialog: () => import('./components/AddPlayerDialog'),
+    Info: () => import('./components/Info')
   }
 }
 </script>
