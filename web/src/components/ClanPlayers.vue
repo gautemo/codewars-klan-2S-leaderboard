@@ -19,13 +19,13 @@ export default {
   },
   computed: {
       playersSorted(){
-          return this.players.sort((a,b) => a.honor < b.honor);
+          return this.players.sort((a,b) => b.honor - a.honor);
       }
   },
   methods: {
       language(p){
           const languages = Object.entries(p.ranks.languages);
-          const fav = languages.sort((a,b) => a[1].score < b[1].score);
+          const fav = languages.sort((a,b) => b[1].score - a[1].score);
           return fav[0][0];
       }
   },

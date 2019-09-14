@@ -26,7 +26,7 @@ export default {
         acc[index].totalHonor += cur.honor;
         return acc;
       }, []);
-      return clans.sort((a,b) => averageScore(a) < averageScore(b));
+      return clans.sort((a,b) => averageScore(b) - averageScore(a));
     }
   },
   components:{
