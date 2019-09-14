@@ -7,9 +7,11 @@
         and rise up the leaderboard!</p>
       <button @click="showDialog = true">ADD WARRIOR</button>
     </header>
-    <button class="toggle one">ALL-TIME</button>
-    <button class="toggle two" title="Honor since 14.09 or when player was added">14.09 - 31.12</button>
-    <Leaderboard :users="allUsers"/>
+    <div class="periods">
+      <button class="toggle one" :class="{ sel: allTime === true}" @click="allTime = true">ALL-TIME</button>
+      <button class="toggle two" :class="{ sel: allTime === false}" @click="allTime = false" title="Honor since 14.09 or when player was added">14.09 - 31.12</button>
+    </div>
+    <Leaderboard :users="allUsersWithPeriod"/>
     <Loader v-if="allUsers.length === 0" />
     <Info/>
 
@@ -24,7 +26,23 @@ export default {
   data() {
     return {
       allUsers: [],
-      showDialog: false
+      showDialog: false,
+      allTime: false
+    }
+  },
+  computed: {
+    allUsersWithPeriod(){
+      if(this.allTime){
+        return this.allUsers.map(u => {
+          u.useHonor = u.honor;
+          return u;
+        });
+      }else{
+        return this.allUsers.map(u => {
+          u.useHonor = u.periodHonor;
+          return u;
+        });
+      }
     }
   },
   methods: {
@@ -101,17 +119,27 @@ header button{
   animation: border-pulsate 10s infinite;
 }
 
-header button:hover{
+header button:hover, .toggle:hover{
   border: 2px solid var(--main-color);
   color: var(--main-color);
 }
 
 @keyframes border-pulsate {
     0%   { border-color: var(--white) }
-    40%   { border-color: var(--white) }
+    40%  { border-color: var(--white) }
     50%  { border-color: var(--main-color); }
-    60% { border-color: var(--white) }
+    60%  { border-color: var(--white) }
     100% { border-color: var(--white) }
+}
+
+.periods{
+  margin: 0 50px;
+}
+
+.periods .toggle.sel{
+  background: #f07c00c9;
+  border: 2px solid var(--first-color);
+  color: var(--white);
 }
 
 </style>

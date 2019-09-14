@@ -6,7 +6,7 @@
                     {{player.username}}
                 </a>
             </span>
-            <Cell title="Honor" :value="player.honor"/>
+            <Cell title="Honor" :value="player.useHonor"/>
             <Cell title="Favourite Language" :value="language(player)"/>
         </div>
     </div>
@@ -19,7 +19,7 @@ export default {
   },
   computed: {
       playersSorted(){
-          return this.players.sort((a,b) => b.honor - a.honor);
+          return this.players.sort((a,b) => b.useHonor - a.useHonor);
       }
   },
   methods: {

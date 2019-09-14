@@ -23,7 +23,7 @@ export default {
           index = acc.length - 1;
         }
         acc[index].users.push(cur);
-        acc[index].totalHonor += cur.honor;
+        acc[index].totalHonor += cur.useHonor;
         return acc;
       }, []);
       return clans.sort((a,b) => averageScore(b) - averageScore(a));
