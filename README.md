@@ -43,6 +43,15 @@ Specific deployment:
 firebase deploy --only hosting,functions,firestore:rules
 ```
 
+### Serve locally
+```
+firebase serve
+```
+Specific serve:
+```
+firebase deploy --only hosting,functions
+```
+
 ### Cloud Functions for Firebase
 Set ACCESS API TOKEN `firebase functions:config:set codewars.token="[INSERT YOUR TOKEN]"`
 

@@ -7,6 +7,8 @@
         and rise up the leaderboard!</p>
       <button @click="showDialog = true">ADD WARRIOR</button>
     </header>
+    <button class="toggle one">ALL-TIME</button>
+    <button class="toggle two" title="Honor since 14.09 or when player was added">14.09 - 31.12</button>
     <Leaderboard :users="allUsers"/>
     <Loader v-if="allUsers.length === 0" />
     <Info/>
@@ -83,10 +85,7 @@ header{
   margin: 20px 50px;
 }
 
-header button{
-  position: absolute;
-  top: 5px;
-  right: 0;
+.toggle, header button{
   border: 2px solid var(--white);
   background: transparent;
   color: var(--white);
@@ -95,9 +94,24 @@ header button{
   transition: all 0.3s ease-in-out;
 }
 
+header button{
+  position: absolute;
+  top: 5px;
+  right: 0;
+  animation: border-pulsate 10s infinite;
+}
+
 header button:hover{
   border: 2px solid var(--main-color);
   color: var(--main-color);
+}
+
+@keyframes border-pulsate {
+    0%   { border-color: var(--white) }
+    40%   { border-color: var(--white) }
+    50%  { border-color: var(--main-color); }
+    60% { border-color: var(--white) }
+    100% { border-color: var(--white) }
 }
 
 </style>

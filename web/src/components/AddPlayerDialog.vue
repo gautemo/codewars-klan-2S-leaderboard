@@ -24,7 +24,11 @@ export default {
   methods: {
     async addPlayer() {
       if(this.newUser.length > 0){
-        await db.collection('users').doc(this.newUser).set({updated: new Date().toUTCString()});
+        await db.collection('users').doc(this.newUser).set(
+            {
+                created: new Date().toUTCString(),
+                periodSubtract: 0
+            });
         this.closeDialog(true);
       }
     },
