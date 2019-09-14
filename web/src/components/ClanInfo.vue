@@ -15,7 +15,7 @@ export default {
   },
   computed:{
       average(){
-          return this.clan.totalHonor / this.clan.users.length
+          return parseFloat((this.clan.totalHonor / this.clan.users.length).toFixed(2));
       }
   },
   components: {

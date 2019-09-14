@@ -55,7 +55,7 @@ export default {
   --white: rgb(247, 247, 247);
   --main-color: #cf022b;
   --secondary-color: #071E22;
-  --first-color: rgb(240, 125, 0);
+  --first-color: #f07d00;
 }
 
 a{
@@ -75,6 +75,7 @@ body{
   background: var(--secondary-color);
   color: var(--white); 
   border-radius: 15px;
+  box-shadow: 0 5px 20px black;
 }
 
 header{
