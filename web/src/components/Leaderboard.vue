@@ -4,7 +4,7 @@
       <summary :style="{ background: `rgba(240, 125, 0, ${1 - i/3})` }">
         <ClanInfo :clan="clan" :place="i" />
       </summary>
-      <ClanPlayers />
+      <ClanPlayers :players="clan.users"/>
     </details>
   </div>
 </template>

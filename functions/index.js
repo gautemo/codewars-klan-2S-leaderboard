@@ -20,7 +20,12 @@ const getUser = async user => {
     const resp = await fetch(`https://www.codewars.com/api/v1/users/${user}?access_key=${token}`);
     const data = await resp.json();
     if(data.success === false){
-        //TODO: remove if reason "not found"
+        if(data.reason === 'not found'){
+            await db.collection('users').doc(user).delete();
+        }
+        return null;
+    }
+    if(!data.clan){
         return null;
     }
     return data;
