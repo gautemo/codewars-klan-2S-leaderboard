@@ -4,7 +4,6 @@
             If you want to contribute, 
             you can send pull requests to this 
             <a href="https://github.com/gautemo/codewars-klan-2S-leaderboard" target="_blank" rel="noopener">GitHub repository</a>
-            .
         </p>
         <p class="me">
             <span class="createdby">Created by: Gaute Meek Olsen</span>

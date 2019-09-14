@@ -1,5 +1,5 @@
 <template>
-  <div class="row" :style="{ background: `rgba(240, 125, 0, ${1 - place/3})` }">
+  <div class="row">
     <span class="place">{{place + 1}}</span>
     <span class="name">{{clan.name}}</span>
     <Cell title="Average Honor" :value="average"/>

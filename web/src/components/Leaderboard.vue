@@ -1,8 +1,11 @@
 <template>
   <div class="clan-list">
-    <div v-for="(clan, i) in clans" :key="clan.name">
-      <ClanInfo :clan="clan" :place="i" />
-    </div>
+    <details v-for="(clan, i) in clans" :key="clan.name">
+      <summary :style="{ background: `rgba(240, 125, 0, ${1 - i/3})` }">
+        <ClanInfo :clan="clan" :place="i" />
+      </summary>
+      <ClanPlayers />
+    </details>
   </div>
 </template>
 
@@ -27,7 +30,8 @@ export default {
     }
   },
   components:{
-    ClanInfo: () => import('./ClanInfo')
+    ClanInfo: () => import('./ClanInfo'),
+    ClanPlayers: () => import('./ClanPlayers')
   }
 }
 
@@ -37,5 +41,13 @@ const averageScore = clan => clan.totalHonor / clan.users.length;
 <style scoped>
 .clan-list{
   margin: 15px 0;
+}
+
+summary{
+  display: grid;
+  grid-template-columns: 15px 1fr;
+  align-items: center;
+  padding-left: 10px;
+  cursor: pointer;
 }
 </style>
