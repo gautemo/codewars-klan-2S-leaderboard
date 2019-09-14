@@ -44,8 +44,7 @@ const averageScore = clan => clan.totalHonor / clan.users.length;
 }
 
 summary{
-  display: grid;
-  grid-template-columns: 15px 1fr;
+  display: flex;
   align-items: center;
   padding-left: 10px;
   cursor: pointer;
