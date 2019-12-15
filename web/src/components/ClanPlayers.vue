@@ -19,7 +19,7 @@ export default {
   },
   computed: {
       playersSorted(){
-          return this.players.sort((a,b) => b.useHonor - a.useHonor);
+          return this.players.concat().sort((a,b) => b.useHonor - a.useHonor);
       }
   },
   methods: {
